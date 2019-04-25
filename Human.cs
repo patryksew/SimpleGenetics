@@ -12,7 +12,7 @@ namespace SimpleGenetics {
             Hetero,
             Dominant
         }
-        //test
+        //test 2
         Genes areHairDark, areHairCurly, isSkinDark, areEyesDark, isTall;
         bool isMan;
 
