@@ -20,7 +20,7 @@ namespace SimpleGenetics {
             generator.ManualPropertiesInput = Input.YesOrNo();
 
             generator.Start();
-            generator.ConsoleWriteProperties();
+            generator.ConsoleWritePropertiesOfPeopleFromLastGeneration();
 
             Console.ReadKey();
         }
