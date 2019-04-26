@@ -70,7 +70,7 @@ namespace SimpleGenetics {
 
         public void ConsoleWritePropertiesOfPeopleFromLastGeneration() {
             Console.WriteLine("Properties of people from last generation: ");
-            for (int i = 0; i < (people[numberOfGenerations - 1].Length - 1); i++) {
+            for (int i = 0; i < (people[numberOfGenerations - 1].Length); i++) {
                 Console.WriteLine("\nProperties of human no {0}:", i + 1);
                 people[numberOfGenerations - 1][i].ConsoleWriteProperties();
             }
@@ -78,9 +78,9 @@ namespace SimpleGenetics {
 
         public void ConsoleWritePropertiesOfPeopleFromAllGenerations () {
             for (int i = 0; i < people.Length; i++) {
-                Console.WriteLine("Properties of people from generation no. " + i);
+                Console.WriteLine("Properties of people from generation no. " + (i + 1));
                 for (int j = 0; j < people[i].Length; j++) {
-                    Console.WriteLine("\nProperties of human no {0}:", j);
+                    Console.WriteLine("\nProperties of human no {0}:", (j + 1));
                     people[i][j].ConsoleWriteProperties();
                 }
             }
