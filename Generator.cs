@@ -19,6 +19,11 @@ namespace SimpleGenetics {
 
         public void Start() {
             people = new Human[numberOfGenerations][];
+            for (int i = 0; i < numberOfGenerations; i++) {
+                int numberOfPeople = numberOfPeopleInFirstGeneration * (int)(Math.Pow(numberOfChildrenPerCouple / 2, i));
+                people[i] = new Human[numberOfPeople];
+            }
+
             if (manualPropertiesInput) {
                 for (int i = 0; i < numberOfPeopleInFirstGeneration; i++) {
                     people[0][i] = new Human();
@@ -32,26 +37,28 @@ namespace SimpleGenetics {
                     people[0][i].RandomProperties();
                 }
             }
+            GenerateAllGenerations();
         }
 
-        public void GenerateAllGenerations () {
+        void GenerateAllGenerations () {
             NR3Generator random = new NR3Generator();
             for (int generationNo = 1; generationNo < people.Length; generationNo++) {
                 List<Human> manList, womanList;
                 manList = new List<Human>();
                 womanList = new List<Human>();
-                for (int HumanNo = 0; HumanNo < people[generationNo-1].Length; HumanNo++) {
-                    if (people[generationNo-1][HumanNo].IsMan == true)
-                        manList.Add(people[generationNo-1][HumanNo]);
+                for (int HumanNo = 0; HumanNo < people[generationNo - 1].Length; HumanNo++) {
+                    if (people[generationNo - 1][HumanNo].IsMan == true)
+                        manList.Add(people[generationNo - 1][HumanNo]);
                     else
-                        womanList.Add(people[generationNo-1][HumanNo]);
+                        womanList.Add(people[generationNo - 1][HumanNo]);
+                }
                     if(manList.Count == 0 || womanList.Count == 0) {
                         Console.WriteLine("Unfortunatly, there are only people of one sex in last generation" +
                             "\nPress any key to exit");
                         Console.ReadKey();
                         System.Diagnostics.Process.GetCurrentProcess().Kill();
                     }
-                }
+                
                 for (int HumanNo = 0; HumanNo < people[generationNo].Length; HumanNo++) {
                     Human mother, father;
                     mother = womanList[random.Next(womanList.Count)];
@@ -63,9 +70,9 @@ namespace SimpleGenetics {
 
         public void ConsoleWritePropertiesOfPeopleFromLastGeneration() {
             Console.WriteLine("Properties of people from last generation: ");
-            for (int i = 0; i < people[numberOfGenerations].Length; i++) {
-                Console.WriteLine("\nProperties of human no {0}:", i);
-                people[0][i].ConsoleWriteProperties();
+            for (int i = 0; i < (people[numberOfGenerations - 1].Length - 1); i++) {
+                Console.WriteLine("\nProperties of human no {0}:", i + 1);
+                people[numberOfGenerations - 1][i].ConsoleWriteProperties();
             }
         }
 
