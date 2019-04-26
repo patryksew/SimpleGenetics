@@ -78,9 +78,9 @@ namespace SimpleGenetics {
 
         public void ConsoleWritePropertiesOfPeopleFromAllGenerations () {
             for (int i = 0; i < people.Length; i++) {
-                Console.WriteLine("Properties of people from generation no. " + i);
+                Console.WriteLine("Properties of people from generation no. " + (i + 1));
                 for (int j = 0; j < people[i].Length; j++) {
-                    Console.WriteLine("\nProperties of human no {0}:", j);
+                    Console.WriteLine("\nProperties of human no {0}:", (j + 1));
                     people[i][j].ConsoleWriteProperties();
                 }
             }

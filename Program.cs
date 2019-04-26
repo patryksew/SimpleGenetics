@@ -20,8 +20,12 @@ namespace SimpleGenetics {
             generator.ManualPropertiesInput = Input.YesOrNo();
 
             generator.Start();
-            generator.ConsoleWritePropertiesOfPeopleFromLastGeneration();
 
+            Console.WriteLine("Do you want to see properties of people from all generations?");
+            if (Input.YesOrNo())
+                generator.ConsoleWritePropertiesOfPeopleFromAllGenerations();
+            else
+                generator.ConsoleWritePropertiesOfPeopleFromLastGeneration();
             Console.ReadKey();
         }
     }

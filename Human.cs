@@ -119,8 +119,6 @@ namespace SimpleGenetics {
         }
 
         Genes RandomGene (int value) {
-            //int value = random.Next(4);
-            Console.WriteLine(value);
             if (value < 1)
                 return Genes.Recessive;
             else if (value < 3)
