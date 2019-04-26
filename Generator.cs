@@ -19,7 +19,6 @@ namespace SimpleGenetics {
 
         public void Start() {
             people = new Human[numberOfGenerations][];
-            people[0][numberOfPeopleInFirstGeneration] = new Human();
             if (manualPropertiesInput) {
                 for (int i = 0; i < numberOfPeopleInFirstGeneration; i++) {
                     people[0][i] = new Human();
