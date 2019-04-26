@@ -14,7 +14,7 @@ namespace SimpleGenetics {
             generator.NumberOfPeopleInFirstGeneration = Input.NumberInt(minPeopleInFirstGeneration, maxPeopleInFirstGeneration);
             Console.WriteLine("Enter number of generations ({0} - {1})", minGenerations, maxGenerations);
             generator.NumberOfGenerations = Input.NumberInt(minGenerations, maxGenerations);
-            Console.WriteLine("Enter number of children per couple in each generation ({0} - {1}", minChildrenPerCouple, maxChildrenPerCouple);
+            Console.WriteLine("Enter number of children per couple in each generation ({0} - {1})", minChildrenPerCouple, maxChildrenPerCouple);
             generator.NumberOfChildrenPerCouple = Input.NumberFloat(minChildrenPerCouple, maxChildrenPerCouple);
             Console.WriteLine("Do you want to enter properties of each human manually?");
             generator.ManualPropertiesInput = Input.YesOrNo();
