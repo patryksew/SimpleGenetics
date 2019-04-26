@@ -40,6 +40,25 @@ namespace SimpleGenetics {
             GenerateAllGenerations();
         }
 
+
+        public void ConsoleWritePropertiesOfPeopleFromLastGeneration() {
+            Console.WriteLine("Properties of people from last generation: ");
+            for (int i = 0; i < (people[numberOfGenerations - 1].Length); i++) {
+                Console.WriteLine("\nProperties of human no {0}:", i + 1);
+                people[numberOfGenerations - 1][i].ConsoleWriteProperties();
+            }
+        }
+
+        public void ConsoleWritePropertiesOfPeopleFromAllGenerations () {
+            for (int i = 0; i < people.Length; i++) {
+                Console.WriteLine("Properties of people from generation no. " + (i + 1));
+                for (int j = 0; j < people[i].Length; j++) {
+                    Console.WriteLine("\nProperties of human no {0}:", (j + 1));
+                    people[i][j].ConsoleWriteProperties();
+                }
+            }
+        }
+
         void GenerateAllGenerations () {
             NR3Generator random = new NR3Generator();
             for (int generationNo = 1; generationNo < people.Length; generationNo++) {
@@ -64,24 +83,6 @@ namespace SimpleGenetics {
                     mother = womanList[random.Next(womanList.Count)];
                     father = manList[random.Next(manList.Count)];
                     people[generationNo][HumanNo] = new Human(father, mother);
-                }
-            }
-        }
-
-        public void ConsoleWritePropertiesOfPeopleFromLastGeneration() {
-            Console.WriteLine("Properties of people from last generation: ");
-            for (int i = 0; i < (people[numberOfGenerations - 1].Length); i++) {
-                Console.WriteLine("\nProperties of human no {0}:", i + 1);
-                people[numberOfGenerations - 1][i].ConsoleWriteProperties();
-            }
-        }
-
-        public void ConsoleWritePropertiesOfPeopleFromAllGenerations () {
-            for (int i = 0; i < people.Length; i++) {
-                Console.WriteLine("Properties of people from generation no. " + (i + 1));
-                for (int j = 0; j < people[i].Length; j++) {
-                    Console.WriteLine("\nProperties of human no {0}:", (j + 1));
-                    people[i][j].ConsoleWriteProperties();
                 }
             }
         }
