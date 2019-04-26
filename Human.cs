@@ -12,7 +12,7 @@ namespace SimpleGenetics {
             Hetero,
             Dominant
         }
-        //test 2
+        
         Genes areHairDark, areHairCurly, isSkinDark, areEyesDark, isTall;
         bool isMan;
 
@@ -28,14 +28,35 @@ namespace SimpleGenetics {
         public Human() {
         }
 
+        public Human (Human father, Human mother) {
+            NR3Generator random = new NR3Generator();
+            if (random.Next(2) == 0)
+                isMan = true;
+            else
+                isMan = false;
+
+            areHairDark = InheritGeneFromParents(mother.AreHairDark, father.AreHairDark);
+            areHairCurly = InheritGeneFromParents(mother.AreHairCurly, father.AreHairCurly);
+            isSkinDark = InheritGeneFromParents(mother.IsSkinDark, father.IsSkinDark);
+            areEyesDark = InheritGeneFromParents(mother.AreEyesDark, father.AreEyesDark);
+            isTall = InheritGeneFromParents(mother.IsTall, father.IsTall);
+        }
+
         #region Properties
-        public string GetSex { get { if (isMan == true) return "man"; return "woman"; } }
-        public string GetHairTint { get { if (areHairDark == Genes.Dominant || areHairDark == Genes.Hetero) return "dark"; return "light"; } }
-        public string GetHairType { get { if (areHairCurly == Genes.Dominant || areHairCurly == Genes.Hetero) return "curly"; return "straight"; } }
-        public string GetSkinTone { get { if (isSkinDark == Genes.Dominant || isSkinDark == Genes.Hetero) return "dark"; return "light"; } }
-        public string GetEyeHue { get { if (areEyesDark == Genes.Dominant || areEyesDark == Genes.Hetero) return "dark"; return "light"; } }
-        public string GetHeight { get { if (isTall == Genes.Dominant || isTall == Genes.Hetero) return "tall"; return "short"; } }
-#endregion
+        public bool IsMan { get { return isMan; } }
+        public string GetSexString { get { if (isMan == true) return "man"; return "woman"; } }
+        public string GetHairTintString { get { if (areHairDark == Genes.Dominant || areHairDark == Genes.Hetero) return "dark"; return "light"; } }
+        public string GetHairTypeString { get { if (areHairCurly == Genes.Dominant || areHairCurly == Genes.Hetero) return "curly"; return "straight"; } }
+        public string GetSkinToneString { get { if (isSkinDark == Genes.Dominant || isSkinDark == Genes.Hetero) return "dark"; return "light"; } }
+        public string GetEyeHueString { get { if (areEyesDark == Genes.Dominant || areEyesDark == Genes.Hetero) return "dark"; return "light"; } }
+        public string GetHeightString { get { if (isTall == Genes.Dominant || isTall == Genes.Hetero) return "tall"; return "short"; } }
+
+        public Genes AreHairDark { get { return areHairDark; } }
+        public Genes AreHairCurly { get { return areHairCurly; } }
+        public Genes IsSkinDark { get { return isSkinDark; } }
+        public Genes AreEyesDark { get { return areEyesDark; } }
+        public Genes IsTall { get { return isTall; } }
+        #endregion
 
         public void SetProperties () {
             Console.WriteLine("Should this human be man?");
@@ -57,7 +78,7 @@ namespace SimpleGenetics {
             SetGene(out isTall);
         }
 
-        public void RandomProperies () {
+        public void RandomProperties () {
             int[] values = new int[6];
             NR3Generator random = new NR3Generator();
             areHairDark = RandomGene(random.Next(4));
@@ -69,6 +90,32 @@ namespace SimpleGenetics {
                 isMan = true;
             else
                 isMan = false;
+        }
+
+        public void ConsoleWriteProperties () {
+            Console.WriteLine("Sex: " + GetSexString);
+            Console.WriteLine("Hair tint: " + GetHairTintString);
+            Console.WriteLine("Hair type: " + GetHairTypeString);
+            Console.WriteLine("Skin tone: " + GetSkinToneString);
+            Console.WriteLine("Eye hue: " + GetEyeHueString);
+            Console.WriteLine("Height: " + GetHeightString);
+        }
+
+        Genes InheritGeneFromParents (Genes motherGene, Genes fatherGene) {
+            if (motherGene == Genes.Dominant && fatherGene == Genes.Dominant)
+                return Genes.Dominant;
+            else if (motherGene == Genes.Recessive && fatherGene == Genes.Recessive)
+                return Genes.Recessive;
+            else {
+                NR3Generator random = new NR3Generator();
+                int randomInt = random.Next(4);
+                if (randomInt == 0)
+                    return Genes.Recessive;
+                else if (randomInt == 1 || randomInt == 2)
+                    return Genes.Hetero;
+                else
+                    return Genes.Dominant;
+            }
         }
 
         Genes RandomGene (int value) {
@@ -98,14 +145,6 @@ namespace SimpleGenetics {
             }
         }
 
-        public void ConsoleWriteProperties () {
-            Console.WriteLine("Sex: " + GetSex);
-            Console.WriteLine("Hair tint: " + GetHairTint);
-            Console.WriteLine("Hair type: " + GetHairType);
-            Console.WriteLine("Skin tone: " + GetSkinTone);
-            Console.WriteLine("Eye hue: " + GetEyeHue);
-            Console.WriteLine("Height: " + GetHeight);
-        }
 
         /// <summary>
         /// Returns true for homozygous
